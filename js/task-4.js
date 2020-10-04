@@ -5,15 +5,27 @@
 // Создай функции increment и decrement для увеличения и уменьшения значения счетчика
 // Добавь слушатели кликов на кнопки, вызовы функций и обновление интерфейса
 
-const currentValue = document.querySelector('#value');
+const refSpanValue = document.querySelector('#value');
 const incrementRef = document.querySelector('[data-action="increment"]');
 const decrementRef = document.querySelector('[data-action="decrement"]');
 
-let counterValue = currentValue;
+let counterValue = Number(refSpanValue.textContent);
+
+function updateSpanValue() {
+  refSpanValue.textContent = counterValue;
+}
 
 incrementRef.addEventListener('click', () => {
-  return counterValue.textContent++;
+  updateCounterValue('increment');
+  updateSpanValue();
 });
+
 decrementRef.addEventListener('click', () => {
-  return currentValue.textContent--;
+  updateCounterValue('decrement');
+  updateSpanValue();
 });
+
+function updateCounterValue(str) {
+  if ('increment' === str) counterValue++;
+  else if ('decrement' === str) counterValue--;
+}
